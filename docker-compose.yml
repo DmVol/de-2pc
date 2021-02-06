@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgres_1:
+    container_name: postgres-fly-booking
+    image: "postgres" 
+    env_file:
+      - envs/database_fly_booking.env
+    volumes:
+      - ./initial_scripts/init_fly_booking.sql:/docker-entrypoint-initdb.d/init_fly_booking.sql      
+    #   - database-data:/var/lib/postgresql/data1/
+    ports:
+      - 5432:5432
+
+  postgres_2:
+    container_name: postgres-hotel-booking
+    image: "postgres" 
+    env_file:
+      - envs/database_hotel_booking.env
+    volumes:
+      - ./initial_scripts/init_hotel_booking.sql:/docker-entrypoint-initdb.d/init_hotel_booking.sql
+    #   - database-data:/var/lib/postgresql/data2/
+    ports:
+      - 5433:5432
+
+  postgres_3:
+    container_name: postgres-account
+    image: "postgres" 
+    env_file:
+      - envs/database_account.env
+    volumes:
+      - ./initial_scripts/init_account.sql:/docker-entrypoint-initdb.d/init_account.sql
+    #   - database-data:/var/lib/postgresql/data3/
+    ports:
+      - 5434:5432
+
+volumes:
+  # database-data:
+  initial_scripts:
