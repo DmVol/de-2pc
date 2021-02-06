@@ -5,6 +5,10 @@ services:
     image: "postgres" 
     env_file:
       - envs/database_fly_booking.env
+    command:
+      - "postgres"
+      - "-c"
+      - "max-prepared-transactions=100"
     volumes:
       - ./initial_scripts/init_fly_booking.sql:/docker-entrypoint-initdb.d/init_fly_booking.sql      
     #   - database-data:/var/lib/postgresql/data1/
@@ -16,6 +20,10 @@ services:
     image: "postgres" 
     env_file:
       - envs/database_hotel_booking.env
+    command:
+      - "postgres"
+      - "-c"
+      - "max-prepared-transactions=100"
     volumes:
       - ./initial_scripts/init_hotel_booking.sql:/docker-entrypoint-initdb.d/init_hotel_booking.sql
     #   - database-data:/var/lib/postgresql/data2/
@@ -27,6 +35,10 @@ services:
     image: "postgres" 
     env_file:
       - envs/database_account.env
+    command:
+      - "postgres"
+      - "-c"
+      - "max-prepared-transactions=100"
     volumes:
       - ./initial_scripts/init_account.sql:/docker-entrypoint-initdb.d/init_account.sql
     #   - database-data:/var/lib/postgresql/data3/
