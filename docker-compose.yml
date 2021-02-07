@@ -4,14 +4,13 @@ services:
     container_name: postgres-fly-booking
     image: "postgres" 
     env_file:
-      - envs/database_fly_booking.env
+      - envs/database_config.env
     command:
       - "postgres"
       - "-c"
-      - "max-prepared-transactions=100"
+      - "max-prepared-transactions=5"
     volumes:
       - ./initial_scripts/init_fly_booking.sql:/docker-entrypoint-initdb.d/init_fly_booking.sql      
-    #   - database-data:/var/lib/postgresql/data1/
     ports:
       - 5432:5432
 
@@ -19,14 +18,13 @@ services:
     container_name: postgres-hotel-booking
     image: "postgres" 
     env_file:
-      - envs/database_hotel_booking.env
+      - envs/database_config.env
     command:
       - "postgres"
       - "-c"
-      - "max-prepared-transactions=100"
+      - "max-prepared-transactions=5"
     volumes:
       - ./initial_scripts/init_hotel_booking.sql:/docker-entrypoint-initdb.d/init_hotel_booking.sql
-    #   - database-data:/var/lib/postgresql/data2/
     ports:
       - 5433:5432
 
@@ -34,17 +32,15 @@ services:
     container_name: postgres-account
     image: "postgres" 
     env_file:
-      - envs/database_account.env
+      - envs/database_config.env
     command:
       - "postgres"
       - "-c"
-      - "max-prepared-transactions=100"
+      - "max-prepared-transactions=5"
     volumes:
       - ./initial_scripts/init_account.sql:/docker-entrypoint-initdb.d/init_account.sql
-    #   - database-data:/var/lib/postgresql/data3/
     ports:
       - 5434:5432
 
 volumes:
-  # database-data:
   initial_scripts:
